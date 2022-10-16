@@ -17,6 +17,9 @@
 			<button @click="filter = 'fav'">Fav Tasks</button>
 		</nav>
 
+		<!-- loading -->
+		<div class="loading" v-if="taskStore.loading == true">Loading tasks...</div>
+
 		<!-- tasks list -->
 		<div class="task-list" v-if="filter === 'all'">
 			<p>You have {{ taskStore.totalCount }} tasks left to do</p>
@@ -40,8 +43,12 @@
 	import { ref } from '@vue/reactivity'
 	import { useTaskStore } from './stores/tasks'
 
+	
 	const taskStore  = useTaskStore()
 
 	const filter = ref('all')
+
+	// fetch tasks
+	taskStore.getTasks()
 
 </script>
